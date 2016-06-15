@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int PICK_FILE_REQUEST = 1;
     private static final String TAG = MainActivity.class.getSimpleName();
     private String selectedFilePath;
+    //            ADD HERE YOUR SERVER URL
     private String SERVER_URL = "http://skmuthaskinclinic.com/JobscheduleApp/API/update_resume.php";
     ImageView ivAttachment;
     Button bUpload;
@@ -215,17 +216,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(MainActivity.this, "Memory Insufficient!", Toast.LENGTH_SHORT).show();
                 }
                 String serverResponseMessage = connection.getResponseMessage();
+
+                // get response form SERVER
                 InputStream in = null;
                 try {
                     in = connection.getInputStream();
                     byte[] buffer2 = new byte[1024];
                     int read;
                     while ((read = in.read(buffer)) > 0) {
-                        Log.d(TAG, "uploadFile: "+(new String(buffer, 0, read, "utf-8")));
+                        Log.d(TAG, "uploadFile:  RESPONSE --> "+(new String(buffer, 0, read, "utf-8")));
                     }
                 } finally {
                     in.close();
                 }
+
                 Log.i(TAG, "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
 
                 //response code of 200 indicates the server status OK
